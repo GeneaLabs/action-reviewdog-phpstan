@@ -11,7 +11,7 @@ export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 if [ ! -f ./phpstan.dist.neon ]
 then
     cp /config/phpstan.dist.neon "${GITHUB_WORKSPACE}/phpstan.dist.neon"
-end
+fi
 
 cp /config/phpstan.neon "${GITHUB_WORKSPACE}/phpstan.neon"
 
