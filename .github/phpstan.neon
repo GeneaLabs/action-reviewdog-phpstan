@@ -1,0 +1,3 @@
+includes:
+    - phpstan.dist.neon
+    - /composer/vendor/sidz/phpstan-rules/rules.neon

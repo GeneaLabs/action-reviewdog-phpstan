@@ -8,5 +8,12 @@ fi
 
 export REVIEWDOG_GITHUB_API_TOKEN="${INPUT_GITHUB_TOKEN}"
 
-php /usr/local/bin/phpstan.phar analyse ${INPUT_TARGET_DIRECTORY} --level=${INPUT_PHPSTAN_LEVEL} --memory-limit 1G --error-format=raw ${INPUT_ARGS} \
+if [ ! -f ./phpstan.dist.neon ]
+then
+    cp /config/phpstan.dist.neon "${GITHUB_WORKSPACE}/phpstan.dist.neon"
+fi
+
+cp /config/phpstan.neon "${GITHUB_WORKSPACE}/phpstan.neon"
+
+php /composer/vendor/phpstan/phpstan/phpstan.phar analyse ${INPUT_TARGET_DIRECTORY} --level=${INPUT_PHPSTAN_LEVEL} --memory-limit 1G --error-format=raw ${INPUT_ARGS} \
     | reviewdog -name=PHPStan -f=phpstan -reporter=${INPUT_REPORTER} -fail-on-error=${INPUT_FAIL_ON_ERROR} -level=${INPUT_LEVEL} -diff='git diff'
