@@ -13,3 +13,4 @@ COPY .github/phpstan.dist.neon /config/phpstan.dist.neon
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
+
